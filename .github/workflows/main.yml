@@ -12,6 +12,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Create dist directory
+        run: mkdir -p dist
+
       - name: Generate snake game from contribution graph
         uses: Platane/snk@v3
         with:
@@ -24,6 +27,6 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -A
-          git commit -m "Generate snake game"
+          git add -f dist/github-snake.svg dist/github-snake-dark.svg
+          git commit -m "Generate snake game" || echo "No changes to commit"
           git push
